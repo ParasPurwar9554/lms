@@ -5,10 +5,8 @@ class Course(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
     description = models.TextField()
-    instructor = models.ForeignKey(User,on_delete=models.CASCADE,related_name="courses")
-
+    instructor = models.ForeignKey(User,on_delete=models.CASCADE,related_name="courses",limit_choices_to={'is_superuser':True})
     thumbnail = models.ImageField(upload_to="course_thumbnails/",blank=True,null=True)
-
     price = models.DecimalField(max_digits=8,decimal_places=2,default=0.00)
 
     level = models.CharField(
