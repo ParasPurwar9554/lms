@@ -1,15 +1,24 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 from .forms import CustomUserCreationForm
 from django.conf import settings
+from django.forms.models import model_to_dict
+from apps.courses.models import Course
 
 # Create your views here.
 
 def home(request):
-    return render(request,"home/index.html")
+    courses = Course.objects.all()
+    return render(request,"home/index.html",{"courses":courses})
 
+def course_details(request,course_slug):
+    course_details = get_object_or_404(Course,slug=course_slug)
+    #course_dict = model_to_dict(course_details)
+    #print(course_dict)
+    return render(request,"home/course_details.html",{"course_details":course_details})
+    
 def student_registation(request):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)

@@ -42,35 +42,17 @@
         <h2 class="text-center mb-4">Popular Courses</h2>
 
         <div class="row">
+            {% for course in courses %}
             <div class="col-md-4">
                 <div class="card shadow-sm">
                     <div class="card-body">
-                        <h5 class="card-title">Python Basics</h5>
-                        <p class="card-text">Learn Python from scratch.</p>
-                        <a href="#" class="btn btn-outline-primary btn-sm">View Course</a>
+                        <h5 class="card-title">{{course.title}}</h5>
+                        <p class="card-text">{{course.description}}</p>
+                        <a href="{% url 'course_details' course.slug %}" class="btn btn-outline-primary btn-sm">View Course</a>
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Django Development</h5>
-                        <p class="card-text">Build real-world web applications.</p>
-                        <a href="#" class="btn btn-outline-primary btn-sm">View Course</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">AI Fundamentals</h5>
-                        <p class="card-text">Understand AI & ML concepts.</p>
-                        <a href="#" class="btn btn-outline-primary btn-sm">View Course</a>
-                    </div>
-                </div>
-            </div>
+           {% endfor %}
         </div>
 
     </div>

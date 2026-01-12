@@ -1,0 +1,82 @@
+{% extends "home/base.html" %}
+
+{% block content %}
+<!-- Course Header -->
+<section class="bg-white shadow-sm">
+    <div class="container py-4">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="fw-bold">{{course_details.title}}</h1>
+                <p class="text-muted mb-1">Instructor: {{ course_details.instructor.get_full_name }}</p>
+                <span class="badge bg-success me-2">{{course_details.level.title}}</span>
+                <span class="badge bg-secondary">{{course_details.duration}}</span>
+            </div>
+            <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                <h3 class="text-primary fw-bold">₹ {{course_details.price}}</h3>
+                <button class="btn btn-success btn-lg w-100 mt-2">
+                    Enroll Now
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Content -->
+<div class="container my-5">
+    <div class="row">
+
+        <!-- Left Content -->
+        <div class="col-md-8">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h4 class="fw-bold mb-3">Course Description</h4>
+                    <p>
+                        {{course_details.description}}
+                    </p>
+                </div>
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h4 class="fw-bold mb-3">What You Will Learn</h4>
+                    <ul class="list-group list-group-flush">
+                        {% for outcome in course_details.outcomes.all %}
+                            <li class="list-group-item">{{outcome}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="col-md-4">
+            <div class="card shadow-sm mb-4">
+                <img src="{{ course_details.thumbnail.url }}" class="card-img-top" alt="{{ course_details.title }}">
+
+                <div class="card-body">
+                    <h5 class="fw-bold">Course Details</h5>
+                    <ul class="list-unstyled mt-3">
+                        <li><strong>Level:</strong>{{course_details.level.title}}</li>
+                        <li><strong>Duration:</strong> {{course_details.duration}}</li>
+                        <li><strong>Price:</strong> ₹ {{course_details.price}}</li>
+                        <li><strong>Language:</strong> English</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="fw-bold">Instructor</h5>
+                    <p class="mb-1">{{ course_details.instructor.get_full_name }}</p>
+                    <p class="text-muted small">
+                        Senior Django Developer with 8+ years of experience.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+

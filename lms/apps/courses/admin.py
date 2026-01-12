@@ -1,6 +1,13 @@
 from django.contrib import admin
-from apps.courses.models import Course
+from apps.courses.models import Course, CourseOutcome
 
-# Register your models here.
+class CourseOutcomeInline(admin.TabularInline):
+    model = CourseOutcome
+    extra = 1
 
-admin.site.register(Course)
+@admin.register(Course)
+class CourseAdmin(admin.ModelAdmin):
+    inlines = [CourseOutcomeInline]
+    prepopulated_fields = {"slug": ("title",)}
+
+admin.site.register(CourseOutcome)
